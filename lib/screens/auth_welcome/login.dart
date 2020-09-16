@@ -223,7 +223,7 @@ class _LoginState extends State < Login > {
                     padding: EdgeInsets.only(top: 20.0),
                   ),
                   Text(
-                    "Login"[0],
+                    "Login",
                     style: TextStyle(
                       fontSize: 20.0,
                       letterSpacing: 3,
