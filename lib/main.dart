@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:watchmatchapp/screens/auth_welcome/welcome.dart';
+import 'package:ShowMatch/screens/auth_welcome/welcome.dart';
 import 'package:global_configuration/global_configuration.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watchmatchapp/components/buttons.dart';
+import 'package:ShowMatch/components/buttons.dart';
 
 buttons(context, register, login){
   return Align(
@@ -36,7 +36,7 @@ buttons(context, register, login){
           ],
         ),
       ),
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.2,
     ),
   );
 }

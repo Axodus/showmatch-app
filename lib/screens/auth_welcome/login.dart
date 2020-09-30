@@ -4,14 +4,14 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:watchmatchapp/components/buttons.dart';
-import 'package:watchmatchapp/helpers/preferences.dart';
+import 'package:ShowMatch/components/buttons.dart';
+import 'package:ShowMatch/helpers/preferences.dart';
 
 // Importing required custom screens and scripts
-import 'package:watchmatchapp/screens/interface/home.dart';
-import 'package:watchmatchapp/screens/auth_welcome/login.dart';
-import 'package:watchmatchapp/screens/auth_welcome/register.dart';
-import 'package:watchmatchapp/helpers/helper.dart';
+import 'package:ShowMatch/screens/interface/home.dart';
+import 'package:ShowMatch/screens/auth_welcome/login.dart';
+import 'package:ShowMatch/screens/auth_welcome/register.dart';
+import 'package:ShowMatch/helpers/helper.dart';
 
 // Importing custom widgets
 
@@ -30,7 +30,7 @@ final kLabelStyle = TextStyle(
 );
 
 final kBoxDecorationStyle = BoxDecoration(
-  color: Colors.transparent,
+  color: Colors.grey[400],
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: [
     BoxShadow(
@@ -131,13 +131,15 @@ class _LoginState extends State < Login > {
       };
 
       // Making the POST request
-      callAPI(context, '/user/login/', loginRequest)
+      callAPI(context, 'user/login/', loginRequest)
         .then((response) {
+          print("Pushing");
           // Decoding the JSON response we got from POST request
           Map < String, dynamic > uData = jsonDecode(response.body);
 
           // Status code handling
           if (response.statusCode == 200) { // Accepted
+            print("200");
             // Saving the token into SharedPreferences
             defaultValues(uData['token'], context)
               .then((login) {
@@ -145,8 +147,8 @@ class _LoginState extends State < Login > {
                   context,
                   MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
-              })
-              .catchError((err) => print(err));
+              });
+              //.catchError((err) => print(err));
 
           } else if (response.statusCode == 403) {
             return showDialog(

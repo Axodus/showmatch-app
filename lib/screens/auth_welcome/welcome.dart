@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Importing required custom screens
-import 'package:watchmatchapp/screens/interface/home.dart';
-import 'package:watchmatchapp/screens/auth_welcome/login.dart';
-import 'package:watchmatchapp/screens/auth_welcome/register.dart';
+import 'package:ShowMatch/screens/interface/home.dart';
+import 'package:ShowMatch/screens/auth_welcome/login.dart';
+import 'package:ShowMatch/screens/auth_welcome/register.dart';
 
 // Importing custom widgets
-import 'package:watchmatchapp/widgets/welcomeScreen/loginRegister.dart';
+import 'package:ShowMatch/widgets/welcomeScreen/loginRegister.dart';
 
 class Welcome extends StatefulWidget {
   @override
