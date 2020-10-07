@@ -24,7 +24,7 @@ final kHintTextStyle = TextStyle(
 );
 
 final kLabelStyle = TextStyle(
-  color: Colors.white,
+  color: Colors.grey[600],
   fontWeight: FontWeight.bold,
   fontFamily: 'OpenSans',
 );
@@ -113,6 +113,7 @@ class _LoginState extends State < Login > {
   }
 
   Future _login() async {
+    print("Hello");
     // Check if the fields are empty, if so displaying an error
     if ((passwordController.text.isEmpty) || (emailController.text.isEmpty)) {
       return showDialog(
@@ -124,12 +125,13 @@ class _LoginState extends State < Login > {
         }
       );
     } else {
+      print("Hello to you");
       // Mapping the data
       Map < String, String > loginRequest = {
         "login": emailController.text,
         "password": passwordController.text
       };
-
+      print("Data has been spotter");
       // Making the POST request
       callAPI(context, 'user/login/', loginRequest)
         .then((response) {
@@ -145,7 +147,7 @@ class _LoginState extends State < Login > {
               .then((login) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => Home()),
                 );
               });
               //.catchError((err) => print(err));
@@ -198,20 +200,6 @@ class _LoginState extends State < Login > {
         children: < Widget > [
           Container(
             height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: < Color > [
-                  Color.fromRGBO(63, 169, 245, 1.0),
-                  Color.fromRGBO(0, 179, 104, 1.0)
-                ],
-              ),
-            ),
-          ),
-          Container(
-            height: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               padding: EdgeInsets.symmetric(
@@ -231,7 +219,7 @@ class _LoginState extends State < Login > {
                       letterSpacing: 3,
                       fontFamily: 'Comfortaa',
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.grey[600],
                     ),
                   ),
                   SizedBox(height: 30.0),

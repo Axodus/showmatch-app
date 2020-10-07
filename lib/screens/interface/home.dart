@@ -1,35 +1,52 @@
 // Premade libraries import
 import 'dart:async';
 import 'dart:ui';
+import 'package:ShowMatch/screens/interface/homeScreen.dart';
+import 'package:ShowMatch/screens/interface/profile.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
-// Importing required custom screens
-import 'package:ShowMatch/screens/interface/home.dart';
-import 'package:ShowMatch/screens/auth_welcome/login.dart';
-import 'package:ShowMatch/screens/auth_welcome/register.dart';
-
 // Importing custom widgets
-class HomeScreen extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeState extends State<Home> {
+
+  int currentIndex = 0;
+
+  final List < Widget > _children = [
+    HomeScreen(),
+    UserProfile()
+  ];
+
+  void _onItemTapped (int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   Widget build(BuildContext context){
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        body: Container(
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Text("IT WORKS"),
-              )
-            ],
+    return Scaffold(
+      body: _children[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const < BottomNavigationBarItem > [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Home" 
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "Profile"
+          ),
+        ],
+        currentIndex: currentIndex,
+        selectedItemColor: Color.fromRGBO(203, 30, 30, 1.0),
+        onTap: _onItemTapped,
+        unselectedItemColor: Colors.grey[400],
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
       ),
     );
   }

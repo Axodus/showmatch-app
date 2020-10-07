@@ -1,11 +1,16 @@
+import 'package:ShowMatch/widgets/homeScreen/card.dart';
 import 'package:flutter/material.dart';
 
-class UserProfile extends StatefulWidget{
+class HomeScreen extends StatefulWidget{
   @override
-  _UserProfileState createState() => _UserProfileState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _UserProfileState extends State<UserProfile> {
+class _HomeScreenState extends State<HomeScreen> {
+  playTrailer(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -16,7 +21,7 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Text("Profile"),
+                child: generateCard(context, playTrailer),
               )
             ],
           ),

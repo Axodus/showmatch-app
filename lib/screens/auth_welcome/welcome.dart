@@ -42,7 +42,7 @@ class _WelcomeState extends State<Welcome> {
       print("User is logged in");
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => Home()),
       );
     }
   }
