@@ -1,5 +1,6 @@
 import 'package:ShowMatch/widgets/homeScreen/card.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget{
   @override
@@ -7,8 +8,16 @@ class HomeScreen extends StatefulWidget{
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String trailerUrl = 'https://www.youtube.com/watch?v=uaaC57tcci0';
+  
   playTrailer(){
-    
+    launch(trailerUrl);
+  }
+
+  onSwipe(){
+    setState(() {
+      trailerUrl = 'https://www.youtube.com/watch?v=lB95KLmpLR4';
+    });
   }
 
   @override
@@ -21,7 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: generateCard(context, playTrailer),
+                child: GestureDetector(
+                  onHorizontalDragEnd: onSwipe(),
+                  child: generateCard(context, playTrailer),
+                )
               )
             ],
           ),
