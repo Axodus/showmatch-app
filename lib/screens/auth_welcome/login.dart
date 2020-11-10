@@ -9,8 +9,6 @@ import 'package:ShowMatch/helpers/preferences.dart';
 
 // Importing required custom screens and scripts
 import 'package:ShowMatch/screens/interface/home.dart';
-import 'package:ShowMatch/screens/auth_welcome/login.dart';
-import 'package:ShowMatch/screens/auth_welcome/register.dart';
 import 'package:ShowMatch/helpers/helper.dart';
 
 // Importing custom widgets
@@ -120,37 +118,69 @@ class _LoginState extends State < Login > {
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text("Login info is missing"),
+            content: Text("Dude put in some info pls"),
+            actions: [
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK")
+              )
+            ],
           );
         }
       );
     } else {
       print("Hello to you");
       // Mapping the data
-      Map < String, String > loginRequest = {
-        "login": emailController.text,
+      Map < String, String > loginData = {
+        "email": emailController.text,
         "password": passwordController.text
       };
-      print("Data has been spotter");
-      // Making the POST request
-      callAPI(context, 'user/login/', loginRequest)
-        .then((response) {
-          print("Pushing");
-          // Decoding the JSON response we got from POST request
-          Map < String, dynamic > uData = jsonDecode(response.body);
+      print("Data has been spotted");
 
-          // Status code handling
+      var rsp = await postRequest(context, 'user/login/', loginData);
+      
+      Map < String, dynamic > rData = jsonDecode(rsp.body);
+      print(rData);
+      print(rData['token']);
+      print(rsp.statusCode);
+
+      if (rsp.statusCode == 200) {
+        print("is 200 really ${rsp.statusCode}");
+
+        defaultValues(rData["body"], context)
+          .then((login) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+            );
+          });        
+      } else if (rsp.statusCode == 400) {
+        errorMessage(
+          context,
+          "Incorrect email or password"
+        );
+      } else {
+        errorMessage(context);
+      }
+        
+        /*.then((response) {
+          print("Pushing");
+
+          Map < String, dynamic > recievedData = jsonDecode(response.body);
+          print("Ooga booga ${response.statusCode}");
+
           if (response.statusCode == 200) { // Accepted
-            print("200");
+            print("XD 200");
             // Saving the token into SharedPreferences
-            defaultValues(uData['token'], context)
+            defaultValues(recievedData['token'], context)
               .then((login) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Home()),
                 );
               });
-              //.catchError((err) => print(err));
 
           } else if (response.statusCode == 403) {
             return showDialog(
@@ -158,6 +188,14 @@ class _LoginState extends State < Login > {
               builder: (context) {
                 return AlertDialog(
                   content: Text("Wrong login information"),
+                  actions: [
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("OK")
+                    )
+                  ],
                 );
               }
             );
@@ -167,12 +205,20 @@ class _LoginState extends State < Login > {
               builder: (context) {
                 return AlertDialog(
                   content: Text("An unknown error has occurred. Please contact the sysadmin"),
+                  actions: [
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("OK")
+                    )
+                  ],
                 );
               }
             );
           }
         })
-        .catchError((err) {});
+        .catchError((err) {});*/
     }
   }
 

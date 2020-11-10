@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -5,52 +7,53 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:ShowMatch/screens/auth_welcome/login.dart';
 
-Future <void> errorMessage (context, [String msg]) async {
+Future < void > errorMessage(context, [String msg]) async {
 
-  if(msg == null) {
+  if (msg == null) {
     msg = "Server com failed. Check your internet or contact the sysadmin";
   }
 
-  Widget confirmButton = FlatButton(
-    onPressed: () { Navigator.of(context).pop(); },
+  Widget okButton = FlatButton(
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
     child: Text("OK")
   );
 
-  WidgetsBinding.instance.addPostFrameCallback((_) async{
+  WidgetsBinding.instance.addPostFrameCallback((_) async {
     return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           content: Text(msg),
-          actions: [confirmButton],
+          actions: [okButton],
         );
       }
     );
   });
 }
 
-Future <Response> callAPI (context, endpoint, [ Map <String, dynamic> request] ) async {
-  try {
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    String token = storage.getString('token');
+postRequest(context, String apiEndpoint, Map < String, String > json) async {
 
-    var head = {
-      "Authorization": "Bearer $token"
-    };
+  String fullEndpoint = "http://aikenahac.ddns.net:3000/$apiEndpoint";
 
-    var response = await post(GlobalConfiguration().getValue('API_URL') + endpoint, headers: head, body: request);
-    
-    if(response.statusCode == 403) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-    }
+  String sendBody = jsonEncode(json);
 
-    return response;
-    
-  } catch(e) {
-    errorMessage(context);
-    return Future.error(e);
-  }
+  Map < String, String > headers = {
+    "Content-type": "application/json"
+  };
+
+  // Making the POST request to the apiEndpoint with the body of json
+  Response response = await post(fullEndpoint, headers: headers, body: sendBody);
+
+  // checking the status code 
+  int statusCode = response.statusCode;
+
+  // Getting the response body
+  String body = response.body;
+  
+  print(statusCode);
+  print(body);
+
+  return response;
 }
