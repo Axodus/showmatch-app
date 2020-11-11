@@ -3,9 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ShowMatch/screens/auth_welcome/login.dart';
-
 Future < void > errorMessage(context, [String msg]) async {
 
   if (msg == null) {

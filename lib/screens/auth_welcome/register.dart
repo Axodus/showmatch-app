@@ -1,12 +1,9 @@
 // Premade libraries import
-import 'dart:async';
 import 'dart:ui';
 import 'package:ShowMatch/components/buttons.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
 // Importing required custom screens
-import 'package:ShowMatch/screens/interface/home.dart';
 import 'package:ShowMatch/screens/auth_welcome/login.dart';
 
 // Importing custom widgets

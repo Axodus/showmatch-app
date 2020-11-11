@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ShowMatch/screens/auth_welcome/welcome.dart';
-import 'package:ShowMatch/screens/interface/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
