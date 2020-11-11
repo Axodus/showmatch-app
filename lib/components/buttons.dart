@@ -21,7 +21,7 @@ fabExtended(width, string, icon, backgroundColor, function, color, hero) {
   );
 }
 
-authButton(function, string, align, width, height, color, borderRad, fontSize, fontColor) {
+mainButton(function, string, align, width, height, color, borderRad, fontSize, fontColor) {
   return Container(
     width: width,
     height: height,

@@ -1,4 +1,4 @@
-package com.example.watchmatchapp
+package com.example.ShowMatch
 
 import io.flutter.embedding.android.FlutterActivity
 

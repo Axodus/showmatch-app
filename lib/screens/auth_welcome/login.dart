@@ -157,8 +157,9 @@ class _LoginState extends State < Login > {
       if (rsp.statusCode == 200) {
         print("is 200 really ${rsp.statusCode}");
 
-        defaultValues(rData["body"], context)
+        defaultValues(rData['token'], context)
           .then((login) {
+            print(rData['token']);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Home()),
@@ -172,61 +173,6 @@ class _LoginState extends State < Login > {
       } else {
         errorMessage(context);
       }
-        
-        /*.then((response) {
-          print("Pushing");
-
-          Map < String, dynamic > recievedData = jsonDecode(response.body);
-          print("Ooga booga ${response.statusCode}");
-
-          if (response.statusCode == 200) { // Accepted
-            print("XD 200");
-            // Saving the token into SharedPreferences
-            defaultValues(recievedData['token'], context)
-              .then((login) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
-              });
-
-          } else if (response.statusCode == 403) {
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text("Wrong login information"),
-                  actions: [
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("OK")
-                    )
-                  ],
-                );
-              }
-            );
-          } else { // Other errors
-            return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  content: Text("An unknown error has occurred. Please contact the sysadmin"),
-                  actions: [
-                    FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("OK")
-                    )
-                  ],
-                );
-              }
-            );
-          }
-        })
-        .catchError((err) {});*/
     }
   }
 
@@ -307,7 +253,7 @@ class _LoginState extends State < Login > {
                     ],
                   ),
                   SizedBox(height: 15),
-                  authButton(
+                  mainButton(
                     _login,
                     "LOGIN",
                     Alignment.bottomCenter,
@@ -319,7 +265,7 @@ class _LoginState extends State < Login > {
                     Colors.grey[600]
                   ),
                   SizedBox(height: 5),
-                  authButton(
+                  mainButton(
                     pushToSignup,
                     "Sign Up",
                     Alignment.center,

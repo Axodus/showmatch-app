@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:ShowMatch/screens/auth_welcome/login.dart';
 
 Future < void > errorMessage(context, [String msg]) async {

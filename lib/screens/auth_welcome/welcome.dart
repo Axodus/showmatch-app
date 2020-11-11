@@ -41,8 +41,9 @@ class _WelcomeState extends State<Welcome> {
   checkLogin() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     // Checking if user is logged in
-    var isLoggedIn = storage.containsKey("token");
-    if (isLoggedIn) {
+    var isLoggedIn = storage.getString('token');
+    print(isLoggedIn);
+    if (isLoggedIn != null) {
       print("User is logged in");
       Navigator.push(
         context,
@@ -59,7 +60,7 @@ class _WelcomeState extends State<Welcome> {
         statusBarBrightness: Brightness.light
       )
     );
-
+    checkLogin();
     return WillPopScope(
       onWillPop: () async => false,
         child: Scaffold(
@@ -81,7 +82,7 @@ class _WelcomeState extends State<Welcome> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    authButton(
+                    mainButton(
                       _register,
                       "Sign Up",
                       Alignment.bottomCenter,
@@ -93,7 +94,7 @@ class _WelcomeState extends State<Welcome> {
                       Colors.white
                     ),
                     SizedBox(height: 15.0),
-                    authButton(
+                    mainButton(
                       _login,
                       "Login",
                       Alignment.bottomCenter,

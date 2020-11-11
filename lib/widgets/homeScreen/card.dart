@@ -7,7 +7,7 @@ String rating = '7.7';
 generateCard(context, playTrailer) {
   return Container(
     height: MediaQuery.of(context).size.height * 0.8,
-    width: MediaQuery.of(context).size.width * 1,
+    width: MediaQuery.of(context).size.width,
     child: Padding(
       padding: EdgeInsets.all(15.0),
       child: Align(
@@ -16,12 +16,14 @@ generateCard(context, playTrailer) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          elevation: 8,
+          color: Colors.blueGrey[400],
+          elevation: 12,
           child: ListView(
             children: [
               Container(
                 child: Image.network(
-                  'https://static.wikia.nocookie.net/filmguide/images/7/73/The_Social_Network.jpg/revision/latest/scale-to-width-down/340?cb=20120407200743'
+                  'https://static.wikia.nocookie.net/filmguide/images/7/73/The_Social_Network.jpg/revision/latest/scale-to-width-down/340?cb=20120407200743',
+                  height: MediaQuery.of(context).size.height * 0.5,
                 ),
               ),
               Container(
@@ -35,7 +37,9 @@ generateCard(context, playTrailer) {
                         child: Text(
                           "$movieTitle ($releaseYear)",
                           style: TextStyle(
-                            fontFamily: 'DinNext'
+                            fontFamily: 'DinNext',
+                            color: Colors.white,
+                            fontSize: 22
                           ),
 
                         ),
@@ -48,7 +52,9 @@ generateCard(context, playTrailer) {
                         child: Text(
                           'Rating: $rating',
                           style: TextStyle(
-                            fontFamily: 'DinNext'
+                            fontFamily: 'DinNext',
+                            color: Colors.white,
+                            fontSize: 16
                           ),
                         ),
                       )
@@ -58,6 +64,7 @@ generateCard(context, playTrailer) {
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: FloatingActionButton(
+                          backgroundColor: Color.fromRGBO(172, 232, 148, 1.0),
                           onPressed: playTrailer,
                           child: Icon(Icons.play_arrow),
                           tooltip: "Plays trailer",

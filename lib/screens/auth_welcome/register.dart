@@ -81,7 +81,7 @@ class _RegisterState extends State < Register > {
                   ],
                 ),
                 SizedBox(height: 50),
-                authButton(
+                mainButton(
                   pushToLogin,
                   "LOGIN INSTEAD",
                   Alignment.bottomCenter,

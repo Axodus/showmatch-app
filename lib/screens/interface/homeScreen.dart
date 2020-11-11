@@ -1,5 +1,6 @@
 import 'package:ShowMatch/widgets/homeScreen/card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget{
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onWillPop: () async => false,
       child: Scaffold(
         body: Container(
+          color: Colors.blueGrey[600],
           child: Stack(
             children: [
               Align(
