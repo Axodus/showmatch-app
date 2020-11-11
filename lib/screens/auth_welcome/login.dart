@@ -281,7 +281,7 @@ class _LoginState extends State < Login > {
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                      " Sign in to continue",
+                      " Sign in to continue ",
                       style: TextStyle(
                         fontSize: 12.0,
                         fontFamily: 'Comfortaa',
