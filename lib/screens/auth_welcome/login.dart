@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
+import 'package:ShowMatch/screens/auth_welcome/register.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ShowMatch/components/buttons.dart';
@@ -18,17 +19,17 @@ final passwordController = TextEditingController();
 
 final kHintTextStyle = TextStyle(
   color: Colors.white54,
-  fontFamily: 'OpenSans',
+  fontFamily: 'DinNext',
 );
 
 final kLabelStyle = TextStyle(
-  color: Colors.grey[600],
+  color: Colors.white,
   fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
+  fontFamily: 'DinNext',
 );
 
 final kBoxDecorationStyle = BoxDecoration(
-  color: Colors.grey[400],
+  color: Colors.blueGrey[300],
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: [
     BoxShadow(
@@ -107,6 +108,13 @@ class _LoginState extends State < Login > {
           hintStyle: kHintTextStyle,
         ),
       ),
+    );
+  }
+
+  pushToSignup() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Register()),
     );
   }
 
@@ -230,21 +238,11 @@ class _LoginState extends State < Login > {
       )
     );
 
-    // Keyboard visibility check (if == 0.0) keyboard is hidden
-    if (MediaQuery.of(context).viewInsets.bottom == 0.0) {
-      setState(() {
-        isKeyboardOpen = false;
-      });
-    } else {
-      setState(() {
-        isKeyboardOpen = true;
-      });
-    }
-
     return Scaffold(
       body: Stack(
         children: < Widget > [
           Container(
+            color: Colors.blueGrey[600],
             height: double.infinity,
             child: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
@@ -254,19 +252,44 @@ class _LoginState extends State < Login > {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: < Widget > [
-                  new Image.asset('assets/images/placeholder.png', height: 150.0),
+                  new Padding(
+                    padding: EdgeInsets.all(0.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: new Image.asset('assets/images/placeholder.png', height: 100,),
+                    ),
+                  ),
                   new Padding(
                     padding: EdgeInsets.only(top: 20.0),
                   ),
-                  Text(
-                    "Login",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      letterSpacing: 3,
-                      fontFamily: 'Comfortaa',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[600],
+                  Row(
+                    //crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                      "Welcome",
+                      style: TextStyle(
+                        fontSize: 28.0,
+                        letterSpacing: 3,
+                        fontFamily: 'Comfortaa',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
+                    ],
+                  ),
+                  Row(
+                    //crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                      " Sign in to continue",
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: 'Comfortaa',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    ],
                   ),
                   SizedBox(height: 30.0),
                   _emailField(),
@@ -283,15 +306,37 @@ class _LoginState extends State < Login > {
                       //_forgotPassBtn(),
                     ],
                   ),
+                  SizedBox(height: 15),
+                  authButton(
+                    _login,
+                    "LOGIN",
+                    Alignment.bottomCenter,
+                    450.0,
+                    50.0,
+                    Colors.white,
+                    10.0,
+                    18.0,
+                    Colors.grey[600]
+                  ),
+                  SizedBox(height: 5),
+                  authButton(
+                    pushToSignup,
+                    "Sign Up",
+                    Alignment.center,
+                    100.0,
+                    30.0,
+                    Colors.blueGrey[900],
+                    5.0,
+                    14.0,
+                    Colors.white
+                  )
                 ],
               ),
             ),
           )
         ],
       ),
-      floatingActionButton: isKeyboardOpen ? null :
-      fabExtended(150.0, "Login", null, Color.fromRGBO(33, 222, 170, 1), _login, Colors.white, "login"),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 }

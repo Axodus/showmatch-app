@@ -1,6 +1,7 @@
 // Premade libraries import
 import 'dart:async';
 import 'dart:ui';
+import 'package:ShowMatch/components/buttons.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,15 +11,18 @@ import 'package:ShowMatch/screens/interface/home.dart';
 import 'package:ShowMatch/screens/auth_welcome/login.dart';
 import 'package:ShowMatch/screens/auth_welcome/register.dart';
 
-// Importing custom widgets
-import 'package:ShowMatch/widgets/welcomeScreen/loginRegister.dart';
-
 class Welcome extends StatefulWidget {
   @override
   _WelcomeState createState() => _WelcomeState();
 }
 
 class _WelcomeState extends State<Welcome> {
+
+  void initState() {
+    super.initState();
+
+    checkLogin();
+  }
 
   Future _login() async {
     Navigator.push(
@@ -60,16 +64,48 @@ class _WelcomeState extends State<Welcome> {
       onWillPop: () async => false,
         child: Scaffold(
           body: Container(
-            child: Stack(
+            color: Colors.blueGrey[600],
+            child: Column(
               children: [
                 Container(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Image.asset('assets/images/placeholder.png'),
+                  height: MediaQuery.of(context).size.height * 0.8,
+                  child: new Padding(
+                    padding: EdgeInsets.fromLTRB(25.0, 100.0, 25.0, 0),
+                    child:Align(
+                      alignment: Alignment.topCenter,
+                      child: Image.asset('assets/images/placeholder.png'),
+                    ),
                   ),
-                  height: MediaQuery.of(context).size.height * 0.55,
                 ),
-                buttons(context, _register, _login),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    authButton(
+                      _register,
+                      "Sign Up",
+                      Alignment.bottomCenter,
+                      350.0,
+                      45.0,
+                      Colors.blueGrey[900],
+                      10.0,
+                      22.0,
+                      Colors.white
+                    ),
+                    SizedBox(height: 15.0),
+                    authButton(
+                      _login,
+                      "Login",
+                      Alignment.bottomCenter,
+                      350.0,
+                      45.0,
+                      Colors.white,
+                      10.0,
+                      22.0,
+                      Colors.grey[600]
+                    ),
+                  ],
+                )
               ],
             ),
           ),

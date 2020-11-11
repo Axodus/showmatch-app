@@ -33,15 +33,14 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   fonts:
-    - family: OpenSans
+    - family: DinNext
       fonts:
-        - asset: assets/fonts/OpenSans/OpenSans-Regular.ttf
-        - asset: assets/fonts/OpenSans/OpenSans-Bold.ttf
+        - asset: assets/fonts/DINNextRoundedLTPro-Regular.ttf
+        - asset: assets/fonts/DINNextRoundedLTPro-Bold.ttf
           weight: 900
 
   assets:
     - assets/images/placeholder.png
-    - assets/cfg/
     
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

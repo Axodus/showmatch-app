@@ -34,6 +34,9 @@ generateCard(context, playTrailer) {
                         alignment: Alignment.topLeft,
                         child: Text(
                           "$movieTitle ($releaseYear)",
+                          style: TextStyle(
+                            fontFamily: 'DinNext'
+                          ),
 
                         ),
                       )
@@ -43,7 +46,10 @@ generateCard(context, playTrailer) {
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Text(
-                          'Rating: $rating'
+                          'Rating: $rating',
+                          style: TextStyle(
+                            fontFamily: 'DinNext'
+                          ),
                         ),
                       )
                     ),

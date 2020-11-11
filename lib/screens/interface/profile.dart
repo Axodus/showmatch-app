@@ -16,7 +16,12 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               Align(
                 alignment: Alignment.center,
-                child: Text("Profile"),
+                child: Text(
+                  "Profile",
+                  style: TextStyle(
+                    fontFamily: 'DinNext'
+                  ),
+                ),
               )
             ],
           ),
