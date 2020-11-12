@@ -154,6 +154,8 @@ class _LoginState extends State < Login > {
       print(rData['token']);
       print(rsp.statusCode);
 
+      saveData(emailController.text);
+
       if (rsp.statusCode == 200) {
         print("is 200 really ${rsp.statusCode}");
 
