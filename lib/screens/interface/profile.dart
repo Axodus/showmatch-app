@@ -84,7 +84,7 @@ class _UserProfileState extends State<UserProfile> {
                 padding: EdgeInsets.all(15.0),
                 child: mainButton(
                   _logout,
-                  "LOGUT",
+                  "LOGOUT",
                   Alignment.center,
                   MediaQuery.of(context).size.width,
                   50.0,
