@@ -60,7 +60,6 @@ class _WelcomeState extends State<Welcome> {
         statusBarBrightness: Brightness.light
       )
     );
-    checkLogin();
     return WillPopScope(
       onWillPop: () async => false,
         child: Scaffold(
