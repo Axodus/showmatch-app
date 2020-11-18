@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-String movieTitle = 'The Social Network';
-String releaseYear = '2010';
-String rating = '7.7';
-
-generateCard(context, playTrailer) {
+generateCard(context, playTrailer, movieTitle, releaseYear, rating, imgUrl) {
   return Container(
-    height: MediaQuery.of(context).size.height * 0.8,
+    height: MediaQuery.of(context).size.height * 0.7,
     width: MediaQuery.of(context).size.width,
     child: Padding(
       padding: EdgeInsets.all(15.0),
@@ -18,11 +14,11 @@ generateCard(context, playTrailer) {
           ),
           color: Colors.blueGrey[400],
           elevation: 12,
-          child: ListView(
+          child: Column(
             children: [
               Container(
                 child: Image.network(
-                  'https://static.wikia.nocookie.net/filmguide/images/7/73/The_Social_Network.jpg/revision/latest/scale-to-width-down/340?cb=20120407200743',
+                  imgUrl,
                   height: MediaQuery.of(context).size.height * 0.5,
                 ),
               ),
@@ -35,7 +31,7 @@ generateCard(context, playTrailer) {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "$movieTitle ($releaseYear)",
+                          "$movieTitle $releaseYear",
                           style: TextStyle(
                             fontFamily: 'DinNext',
                             color: Colors.white,
@@ -59,7 +55,7 @@ generateCard(context, playTrailer) {
                         ),
                       )
                     ),
-                    new Padding(
+                    /*new Padding(
                       padding: EdgeInsets.all(15.0),
                       child: Align(
                         alignment: Alignment.bottomRight,
@@ -71,7 +67,7 @@ generateCard(context, playTrailer) {
                           mini: true,
                         ),
                       ),
-                    )
+                    )*/
                   ],
                 ),
               )
