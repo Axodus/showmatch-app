@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ShowMatch/helpers/config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -31,7 +32,7 @@ Future < void > errorMessage(context, [String msg]) async {
 
 postRequest(context, String apiEndpoint, Map < String, String > json) async {
 
-  String fullEndpoint = "http://aikenahac.ddns.net:3000/$apiEndpoint";
+  String fullEndpoint = "$apiUrl/$apiEndpoint";
 
   String sendBody = jsonEncode(json);
 
