@@ -1,1 +1,1 @@
-String apiUrl = "http://aikenahac.ddns.net:9090";
+String apiUrl = "http://api.showmatch.orb.si/";

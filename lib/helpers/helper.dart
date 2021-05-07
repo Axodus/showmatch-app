@@ -30,6 +30,24 @@ Future < void > errorMessage(context, [String msg]) async {
   });
 }
 
+getRequest(context, String apiEndpoint) async {
+
+  String fullEndpoint = "$apiUrl/$apiEndpoint";
+
+  Response response = await get(fullEndpoint);
+
+  // checking the status code 
+  int statusCode = response.statusCode;
+
+  // Getting the response body
+  String body = response.body;
+  
+  print(statusCode);
+  print(body);
+
+  return response;
+}
+
 postRequest(context, String apiEndpoint, Map < String, String > json) async {
 
   String fullEndpoint = "$apiUrl/$apiEndpoint";
