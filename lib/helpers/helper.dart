@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ShowMatch/helpers/config.dart';
 import 'package:flutter/material.dart';
@@ -32,43 +33,42 @@ Future < void > errorMessage(context, [String msg]) async {
 
 getRequest(context, String apiEndpoint) async {
 
-  String fullEndpoint = "$apiUrl/$apiEndpoint";
+  HttpClient client = new HttpClient();
+  client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
 
-  Response response = await get(fullEndpoint);
+  String url = "$apiUrl/$apiEndpoint";
 
-  // checking the status code 
-  int statusCode = response.statusCode;
+  HttpClientRequest request = await client.getUrl(Uri.parse(url));
 
-  // Getting the response body
-  String body = response.body;
-  
-  print(statusCode);
-  print(body);
+  request.headers.set('content-type', 'application/json');
 
-  return response;
+  HttpClientResponse response = await request.close();
+
+  String reply = await response.transform(utf8.decoder).join();
+  print(reply);
+
+  return reply;
 }
 
 postRequest(context, String apiEndpoint, Map < String, String > json) async {
 
-  String fullEndpoint = "$apiUrl/$apiEndpoint";
+  HttpClient client = new HttpClient();
+  client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+
+  String url = "$apiUrl/$apiEndpoint";
 
   String sendBody = jsonEncode(json);
 
-  Map < String, String > headers = {
-    "Content-type": "application/json"
-  };
+  HttpClientRequest request = await client.postUrl(Uri.parse(url));
 
-  // Making the POST request to the apiEndpoint with the body of json
-  Response response = await post(fullEndpoint, headers: headers, body: sendBody);
+  request.headers.set('content-type', 'application/json');
 
-  // checking the status code 
-  int statusCode = response.statusCode;
+  request.add(utf8.encode(sendBody));
 
-  // Getting the response body
-  String body = response.body;
-  
-  print(statusCode);
-  print(body);
+  HttpClientResponse response = await request.close();
 
-  return response;
+  String reply = await response.transform(utf8.decoder).join();
+  print(reply);
+
+  return reply;
 }

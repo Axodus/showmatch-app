@@ -1,4 +1,4 @@
-package com.example.ShowMatch
+package com.ShowMatch.si
 
 import io.flutter.embedding.android.FlutterActivity
 

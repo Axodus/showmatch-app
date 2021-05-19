@@ -1,1 +1,1 @@
-String apiUrl = "http://api.showmatch.orb.si/";
+String apiUrl = "https://showmatch.orb.si";

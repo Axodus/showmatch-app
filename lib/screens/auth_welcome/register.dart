@@ -195,31 +195,29 @@ class _RegisterState extends State < Register > {
 
       var rsp = await postRequest(context, 'user/signup/', registerData);
       
-      Map < String, dynamic > rData = jsonDecode(rsp.body);
+      Map < String, dynamic > rData = jsonDecode(rsp);
       print(rData);
       print(rData['token']);
-      print(rsp.statusCode);
 
       saveData(emailController.text);
 
-      if (rsp.statusCode == 200) {
-        print("is 200 really ${rsp.statusCode}");
+
+      if (rData['token'].length >= 1) {
+        print('It appears you are here. Hello!');
 
         defaultValues(rData['token'], context)
-          .then((login) {
-            print(rData['token']);
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Home()),
-            );
-          });        
-      } else if (rsp.statusCode == 400) {
-        errorMessage(
-          context,
-          "Invalid or taken email"
-        );
+            .then((login) {
+          print(rData['token']);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+          );
+        });
       } else {
-        errorMessage(context);
+        errorMessage(
+            context,
+            "Invalid or taken email"
+        );
       }
     }
   }

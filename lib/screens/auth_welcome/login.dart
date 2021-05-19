@@ -149,15 +149,14 @@ class _LoginState extends State < Login > {
 
       var rsp = await postRequest(context, 'user/login/', loginData);
       
-      Map < String, dynamic > rData = jsonDecode(rsp.body);
+      Map < String, dynamic > rData = jsonDecode(rsp);
       print(rData);
       print(rData['token']);
-      print(rsp.statusCode);
 
       saveData(emailController.text);
 
-      if (rsp.statusCode == 200) {
-        print("is 200 really ${rsp.statusCode}");
+      if (rData['token'].length >= 1) {
+        print('It appears you are here. Hello!');
 
         defaultValues(rData['token'], context)
           .then((login) {
@@ -167,13 +166,11 @@ class _LoginState extends State < Login > {
               MaterialPageRoute(builder: (context) => Home()),
             );
           });        
-      } else if (rsp.statusCode == 400) {
+      } else {
         errorMessage(
           context,
           "Incorrect email or password"
         );
-      } else {
-        errorMessage(context);
       }
     }
   }
