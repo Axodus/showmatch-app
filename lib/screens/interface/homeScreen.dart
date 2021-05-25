@@ -38,11 +38,11 @@ class HomeScreen extends StatefulWidget{
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String movieTitle;
-  String releaseYear;
-  String rating;
-  String trailerUrl;
-  String thumbnailUrl;
+  var movieTitle;
+  var releaseYear;
+  var rating;
+  var trailerUrl;
+  var thumbnailUrl;
 
   int howManyMovies;
   bool hasSelectedNo = false;
@@ -67,8 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
             cursorWidth: 2.5,
             cursorColor: Colors.white,
             controller: numberOfMovies,
-            autofillHints: < String > [AutofillHints.email],
-            keyboardType: TextInputType.emailAddress,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -87,10 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   setNoOfMovies() {
+
     setState(() {
       howManyMovies = int.parse(numberOfMovies.text);
       hasSelectedNo = true;
     });
+
+    print("URL OF THUMBNAIL: $thumbnailUrl");
   }
 
   goBack() {
@@ -128,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     var response = await getRequest(context, 'movies');
 
-    var movieList = jsonDecode(response.body);
+    var movieList = jsonDecode(response);
     print(movieList);
     print("\n\n");
 

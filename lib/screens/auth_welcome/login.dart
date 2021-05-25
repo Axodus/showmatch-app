@@ -153,8 +153,6 @@ class _LoginState extends State < Login > {
       print(rData);
       print(rData['token']);
 
-      saveData(emailController.text);
-
       if (rData['token'].length >= 1) {
         print('It appears you are here. Hello!');
 

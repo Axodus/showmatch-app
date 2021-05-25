@@ -16,7 +16,7 @@ void main() async {
     .then((_) => runApp(
      new MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ChatPage()
+        home: Welcome()
       )
     ));
 }

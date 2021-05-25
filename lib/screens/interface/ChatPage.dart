@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_socket_io/flutter_socket_io.dart';
 import 'package:flutter_socket_io/socket_io_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final kHintTextStyle = TextStyle(
   color: Colors.white54,
@@ -39,10 +40,13 @@ class _ChatPageState extends State<ChatPage> {
   TextEditingController textController;
   ScrollController scrollController;
 
+  var author;
+
   @override
   void initState() {
     //Initializing the message list
     messages = List<String>();
+    getAuthor();
     //Initializing the TextEditingController and ScrollController
     textController = TextEditingController();
     scrollController = ScrollController();
@@ -59,7 +63,7 @@ class _ChatPageState extends State<ChatPage> {
     socketIO.subscribe('receive_message', (jsonData) {
       //Convert the JSON data received into a Map
       Map<String, dynamic> data = json.decode(jsonData);
-      this.setState(() => messages.add(data['message']));
+      this.setState(() => messages.add('${data['author']}: ${data['message']}'));
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
         duration: Duration(milliseconds: 600),
@@ -70,6 +74,12 @@ class _ChatPageState extends State<ChatPage> {
     print("time to connect");
     socketIO.connect();
     super.initState();
+  }
+
+  getAuthor() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+
+    author = storage.getString('name');
   }
 
   Widget buildSingleMessage(int index) {
@@ -92,7 +102,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget buildMessageList() {
     return Container(
-      height: height * 0.8,
+      height: height * 0.71,
       width: width,
       child: ListView.builder(
         controller: scrollController,
@@ -138,7 +148,7 @@ class _ChatPageState extends State<ChatPage> {
       backgroundColor: Colors.blueGrey[300],
       onPressed: () {
         if (textController.text.isNotEmpty) {
-          socketIO.sendMessage('send_message', json.encode({'message': textController.text}));
+          socketIO.sendMessage('send_message', json.encode({'author': author, 'message': textController.text}));
           this.setState(() => messages.add(textController.text));
           textController.text = '';
           scrollController.animateTo(
@@ -182,6 +192,7 @@ class _ChatPageState extends State<ChatPage> {
               SizedBox(height: height * 0.1),
               buildMessageList(),
               buildInputArea(),
+              SizedBox(height: 20)
             ],
           ),
         ),

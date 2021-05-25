@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 qrCard(context, uID) {
   return Container(
-    height: MediaQuery.of(context).size.height * 0.55,
+    height: MediaQuery.of(context).size.height * 0.6,
     child: new Padding(
       padding: EdgeInsets.all(15.0),
       child: Card(

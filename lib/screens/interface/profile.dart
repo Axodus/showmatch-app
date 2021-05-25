@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ShowMatch/components/buttons.dart';
 import 'package:ShowMatch/screens/auth_welcome/welcome.dart';
 import 'package:ShowMatch/widgets/profileScreen/appVer.dart';
@@ -5,6 +7,7 @@ import 'package:ShowMatch/widgets/profileScreen/qrCard.dart';
 import 'package:ShowMatch/widgets/profileScreen/user.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ShowMatch/helpers/helper.dart';
 
 class UserProfile extends StatefulWidget{
   @override
@@ -14,6 +17,7 @@ class UserProfile extends StatefulWidget{
 class _UserProfileState extends State<UserProfile> {
 
   String uID = '0f5w-a8c5-b9g7-ec9s';
+  String name = " ";
   String email = " ";
 
   void initState() {
@@ -36,8 +40,12 @@ class _UserProfileState extends State<UserProfile> {
   getName() async{
     SharedPreferences storage = await SharedPreferences.getInstance();
 
+    var namae = storage.getString('name');
+    var emailu = storage.getString('email');
+
     setState(() {
-      email = storage.getString('email');
+      name = namae;
+      email = emailu;
     });
   }
 
@@ -50,7 +58,7 @@ class _UserProfileState extends State<UserProfile> {
           color: Colors.blueGrey[600],
           child: ListView(
             children: [
-              userCard(context, email),
+              userCard(context, email, name),
               new Padding(
                 padding: EdgeInsets.all(15.0),
                 child: new Divider(

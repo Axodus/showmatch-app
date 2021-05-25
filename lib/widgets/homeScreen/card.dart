@@ -17,10 +17,15 @@ generateCard(context, playTrailer, movieTitle, releaseYear, rating, imgUrl) {
           child: Column(
             children: [
               Container(
-                child: Image.network(
+                child: imgUrl != null ? Image.network(
                   imgUrl,
                   height: MediaQuery.of(context).size.height * 0.5,
-                ),
+                )
+                    :
+                Image.network(
+                  "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg",
+                  height: MediaQuery.of(context).size.height * 0.5,
+                )
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.13,
@@ -37,7 +42,6 @@ generateCard(context, playTrailer, movieTitle, releaseYear, rating, imgUrl) {
                             color: Colors.white,
                             fontSize: 22
                           ),
-
                         ),
                       )
                     ),

@@ -1,5 +1,6 @@
 // Premade libraries import
 import 'dart:ui';
+import 'package:ShowMatch/screens/interface/ChatPage.dart';
 import 'package:ShowMatch/screens/interface/homeScreen.dart';
 import 'package:ShowMatch/screens/interface/profile.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _HomeState extends State<Home> {
 
   final List < Widget > _children = [
     HomeScreen(),
+    ChatPage(),
     UserProfile()
   ];
 
@@ -32,12 +34,16 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomNavigationBar(
         items: const < BottomNavigationBarItem > [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home" 
+              icon: Icon(Icons.home),
+              label: "Home"
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile"
+              icon: Icon(Icons.chat),
+              label: "Chat"
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile"
           ),
         ],
         currentIndex: currentIndex,

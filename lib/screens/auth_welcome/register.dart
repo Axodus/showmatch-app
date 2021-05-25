@@ -199,9 +199,6 @@ class _RegisterState extends State < Register > {
       print(rData);
       print(rData['token']);
 
-      saveData(emailController.text);
-
-
       if (rData['token'].length >= 1) {
         print('It appears you are here. Hello!');
 

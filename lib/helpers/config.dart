@@ -1,1 +1,1 @@
-String apiUrl = "https://sm.aikenahac.com";
+var apiUrl = "https://sm.aikenahac.com";
