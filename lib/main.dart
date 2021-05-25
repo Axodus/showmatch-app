@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ShowMatch/screens/interface/ChatPage.dart';
 import 'package:ShowMatch/screens/auth_welcome/welcome.dart';
 
 void main() async {
@@ -15,7 +16,7 @@ void main() async {
     .then((_) => runApp(
      new MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Welcome()
+        home: ChatPage()
       )
     ));
 }
