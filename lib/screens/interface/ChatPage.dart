@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ShowMatch/helpers/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_socket_io/flutter_socket_io.dart';
 import 'package:flutter_socket_io/socket_io_manager.dart';
@@ -47,6 +48,7 @@ class _ChatPageState extends State<ChatPage> {
     //Initializing the message list
     messages = List<String>();
     getAuthor();
+    getMessages();
     //Initializing the TextEditingController and ScrollController
     textController = TextEditingController();
     scrollController = ScrollController();
@@ -80,6 +82,22 @@ class _ChatPageState extends State<ChatPage> {
     SharedPreferences storage = await SharedPreferences.getInstance();
 
     author = storage.getString('name');
+  }
+
+  getMessages() async {
+    var request = await getRequest(context, 'chat-history');
+    var msgs = jsonDecode(request);
+
+    print("Messages: ");
+    print(msgs);
+
+    for (int i = 0; i < msgs.length; i++) {
+      setState(() {
+        messages.add("${msgs[i]["author"]}: ${msgs[i]["content"]}");
+      });
+    }
+
+    print(messages);
   }
 
   Widget buildSingleMessage(int index) {
